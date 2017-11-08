@@ -25,9 +25,11 @@ void selecionar_tabuleiro(char A[MAX][MAX])
 {
     int opt;
 
-    cout << EOL << "Selecione o tipo de tabuleiro digitando o numero correspondente: 0:INGLES ou 1:EUROPEU. ";
-    cin >> opt;
-    cout << EOL;
+    do {
+        cout << EOL << "Selecione o tipo de tabuleiro digitando o numero correspondente: 0:INGLES ou 1:EUROPEU. ";
+        cin >> opt;
+        cout << EOL;
+    }while(opt != 0 && opt != 1);
 
     if(opt == EUROPEU) {
         cout << "O Tabuleiro Europeu foi selecionado." << EOL;
