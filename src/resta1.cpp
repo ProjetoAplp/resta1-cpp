@@ -129,8 +129,17 @@ int main(){
     
     //gameLoop
     while(1){
-    	exibe_tabuleiro(tabuleiro);
-    	joga(tabuleiro);
+        exibe_tabuleiro(tabuleiro);
+        joga(tabuleiro);
+
+        if(venceu(tabuleiro)) {
+            cout << "VENCEU" << EOL;
+            break;
+        } else if(!existeJogada(tabuleiro)) {
+            cout << "PERDEU" << EOL;
+            break;
+        }
+
     }
 
     return 0;
