@@ -74,7 +74,7 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	int y = jogada.y;
 	int direcao = jogada.direcao;
 	
-	printf("%d  %d  %d  x,y,dir \n", x, y, direcao);//debug
+	//printf("%d  %d  %d  x,y,dir \n", x, y, direcao);//debug
 
 	//nao possui peca no lugar indicado
 	if(tabuleiro[x][y] == '0'){

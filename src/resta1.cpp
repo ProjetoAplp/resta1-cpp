@@ -124,7 +124,7 @@ int main(){
     char tabuleiro[MAX][MAX];
     
     //setup
-    //imprime_regras();
+    imprime_regras();
     selecionar_tabuleiro(tabuleiro);
     
     //gameLoop
