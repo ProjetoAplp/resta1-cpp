@@ -1,5 +1,7 @@
-
 #include <iostream>
+#include<stdio.h>
+#include "realizaJogadas.h"
+
 #define MAX 7
 #define INGLES 0
 #define EUROPEU 1
@@ -7,7 +9,7 @@
 #define TRIM "\t"
 using namespace std;
 
-// Função para atribuir os valores da matriz B a matriz A
+// Funcao para atribuir os valores da matriz B a matriz A
 void atribuir_tabuleiro(char A[MAX][MAX], char B[MAX][MAX]){
 
     int i, j;
@@ -20,7 +22,7 @@ void atribuir_tabuleiro(char A[MAX][MAX], char B[MAX][MAX]){
 
 };
 
-//Função para atribuir o tabuleiro selecionado
+//Funcao para atribuir o tabuleiro selecionado
 void selecionar_tabuleiro(char A[MAX][MAX])
 {
     int opt;
@@ -60,13 +62,13 @@ void selecionar_tabuleiro(char A[MAX][MAX])
     }
 };
 
-//Função para exibir o tabuleiro selecionado
+//Funcao para exibir o tabuleiro selecionado
 void exibe_tabuleiro(char tabuleiro[MAX][MAX])
 {
     int i,j, k;
     cout << EOL;
-    cout << "x" << TRIM;
-    char coluna[MAX] = {'A','B','C','D','E','F','G'};
+    cout << "x" << TRIM
+;    char coluna[MAX] = {'A','B','C','D','E','F','G'};
     
     for(i=0; i < MAX; i++){
         cout << coluna[i] << TRIM;
@@ -87,7 +89,7 @@ void exibe_tabuleiro(char tabuleiro[MAX][MAX])
     }
 };
 
-//Função que imprime na tela as regras do jogo 
+//Funcao que imprime na tela as regras do jogo 
 void imprime_regras(){
 
     cout << EOL;
@@ -121,9 +123,15 @@ int main(){
     
     char tabuleiro[MAX][MAX];
     
+    //setup
     imprime_regras();
     selecionar_tabuleiro(tabuleiro);
-    exibe_tabuleiro(tabuleiro);
+    
+    //gameLoop
+    while(1){
+    	exibe_tabuleiro(tabuleiro);
+    	joga(tabuleiro);
+    }
 
     return 0;
 };
