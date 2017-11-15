@@ -3,12 +3,17 @@
 ** que servem para realizar diversos cálculos matemáticos
 */
 
-
 //structs
 struct Jogada{
     int  x;
     int  y;
     int direcao;
+
+    Jogada()
+    {   }
+
+    Jogada(int a, int b, int c) : x(a), y(b), direcao(c)
+    {   }
 };
 
 struct Tabuleiro{
@@ -61,4 +66,17 @@ void rotacionaTabuleiro(char tabuleiro[][7]);
 * Verifica se o jogador venceu o jogo
 */
 bool venceu(char tabuleiro[][7]);
+
+
+/*
+ Oferece a possibilidade da proxima jogada ser automatica
+ */
+bool jogadaSeraAutomatica();
+
+/*
+* Joga automaticamente
+*/
+void jogadaAutomatica(char tabuleiro[][7]);
+
+
 

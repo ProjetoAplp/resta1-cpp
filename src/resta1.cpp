@@ -1,5 +1,6 @@
 #include <iostream>
 #include<stdio.h>
+#include <string.h>
 #include "realizaJogadas.h"
 
 #define MAX 7
@@ -129,14 +130,20 @@ int main(){
     
     //gameLoop
     while(1){
+
         exibe_tabuleiro(tabuleiro);
-        joga(tabuleiro);
+
+        if(jogadaSeraAutomatica()) {
+            jogadaAutomatica(tabuleiro);
+        } else {
+            joga(tabuleiro);
+        }
 
         if(venceu(tabuleiro)) {
-            cout << "VENCEU" << EOL;
+            cout << EOL <<  "VENCEU" << EOL;
             break;
         } else if(!existeJogada(tabuleiro)) {
-            cout << "PERDEU" << EOL;
+            cout << EOL << "PERDEU" << EOL;
             break;
         }
 

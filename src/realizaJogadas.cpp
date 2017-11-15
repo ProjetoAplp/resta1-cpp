@@ -6,6 +6,9 @@
 #define SIZE 7
 #define EOL "\n"
 
+using namespace std;
+
+int dp[10][10][10];
 enum direcoes {cima = 0, baixo = 1, esquerda = 2, direita = 3};
 
 //declarando as funcoes
@@ -164,6 +167,89 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
     return true;
 }
 
+bool validarJogadaNoMsg(struct Jogada jogada, char tabuleiro[][SIZE]){
+	
+	int x = jogada.x;
+	int y = jogada.y;
+	int direcao = jogada.direcao;
+	
+	//printf("%d  %d  %d  x,y,dir \n", x, y, direcao);//debug
+
+	//nao possui peca no lugar indicado
+	if(tabuleiro[x][y] == '0'){
+		return false;
+	}
+	
+	switch( direcao ){
+	    case cima:
+	         //checka se espaco na matriz pro "salto"
+			if (x<2){
+				return false;
+			}
+			//checka se existe uma peca adjacente pra saltar por cima
+			if (tabuleiro[x-1][y] != '1'){
+				return false;
+			}
+			//checka se o espaco do salto esta vazio
+			if (tabuleiro[x-2][y] != '0'){
+				return false;
+			}
+	        break;
+	    
+	    case baixo:
+            //checka se espaco na matriz pro "salto"
+			if (x>4){
+				return false;
+			}
+			//checka se existe uma peca adjacente pra saltar por cima
+			if (tabuleiro[x+1][y] != '1'){
+				return false;
+			}
+			//checka se o espaco do salto esta vazio
+			if (tabuleiro[x+2][y] != '0'){
+				return false;
+			}
+            break;
+    
+	    case esquerda:
+            //checka se espaco na matriz pro "salto"
+			if (y<2){
+				return false;
+			}
+			//checka se existe uma peca adjacente pra saltar por cima
+			if (tabuleiro[x][y-1] != '1'){
+				return false;
+			}
+			//checka se o espaco do salto esta vazio
+			if (tabuleiro[x][y-2] != '0'){
+				return false;
+			}
+            break;
+	    
+	    case direita:
+            //checka se espaco na matriz pro "salto"
+			if (y>4){
+				return false;
+			}
+			//checka se existe uma peca adjacente pra saltar por cima
+			if (tabuleiro[x][y+1] != '1'){
+				return false;
+			}
+			//checka se o espaco do salto esta vazio
+			if (tabuleiro[x][y+2] != '0'){
+				return false;
+			}
+            break;
+	    
+	    default:
+			break;
+	}
+	
+    return true;
+}
+
+
+
 void realizaJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	//remove a peca do espaco escolhido
 	int x = jogada.x;
@@ -204,34 +290,6 @@ void realizaJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
     default: 
     	break;
 	}
-	
-	// if(direcao == 0)/*cima*/{
- //        //come a peca adjacante
-	// 	tabuleiro[x-1][y] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x-2][y] = '1';
- //    } 
-
-	// if(direcao == 1)/*baixo*/{
-	// 	//come a peca adjacante
-	// 	tabuleiro[x+1][y] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x+2][y] = '1';
- //    }
-
-	// if(direcao == 2)/*esquerda*/{
-	// 	//come a peca adjacante
-	// 	tabuleiro[x][y-1] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x][y-2] = '1';
- //    }
-
-	// if(direcao == 3)/*direita*/{
-	// 	//come a peca adjacante
-	// 	tabuleiro[x][y+1] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x][y+2] = '1';
- //    }
 }
 
 bool joga(char tabuleiro[][SIZE]){
@@ -300,6 +358,49 @@ bool venceu(char tabuleiro[][SIZE]) {
 
 	return flag;
 }
+
+
+bool jogadaSeraAutomatica() {
+
+	char escolha;
+
+	do {
+
+		printf("Deseja que a proxima jogada seja automatica?\nS - SIM    N - NAO\n");
+		getchar();
+		scanf("%c", &escolha);
+
+		escolha = toupper(escolha);
+
+	} while(escolha != 'S' && escolha != 'N');
+
+
+	return escolha == 'S';
+
+}
+
+void jogadaAutomatica(char tabuleiro[][SIZE]) {
+
+	for(int x = 0; x < SIZE; x++) {
+		for(int y = 0; y < SIZE; y++) {
+			for(int k = 0; k < 4; k++) {
+				Jogada jogada(x, y, k);
+
+				if(validarJogadaNoMsg(jogada, tabuleiro)) {
+					realizaJogada(jogada, tabuleiro);
+					return;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
 
 
 
