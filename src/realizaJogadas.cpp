@@ -303,8 +303,6 @@ bool jogadaSeraAutomatica() {
 
 		escolha = toupper(escolha);
 
-		cout << "MIAU: " << escolha << "\n";
-
 	} while(escolha != 'S' && escolha != 'N');
 
 
