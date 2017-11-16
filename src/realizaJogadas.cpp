@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include "realizaJogadas.h"
 
+using namespace std;
+
 #define SIZE 7
 #define EOL "\n"
 
@@ -68,7 +70,13 @@ int getDirecao(void){
     return direcao;
 }
 
-bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
+void imprimeMensagem(string mensagem) {
+	cout << mensagem << endl;
+}
+
+bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE], bool deveImprimir){
+	
+	
 	
 	int x = jogada.x;
 	int y = jogada.y;
@@ -78,7 +86,8 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 
 	//nao possui peca no lugar indicado
 	if(tabuleiro[x][y] == '0'){
-		printf("Escolha um espaco com uma peca\n");
+		if(deveImprimir)
+			printf("Escolha um espaco com uma peca\n");
 		return false;
 	}
 	
@@ -86,17 +95,20 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	    case cima:
 	         //checka se espaco na matriz pro "salto"
 			if (x<2){
-				printf("Movimento invalido c1\n");
+				if(deveImprimir)
+					printf("Movimento invalido c1\n");
 				return false;
 			}
 			//checka se existe uma peca adjacente pra saltar por cima
 			if (tabuleiro[x-1][y] != '1'){
-				printf("Movimento invalido c2\n");
+				if(deveImprimir)
+					printf("Movimento invalido c2\n");
 				return false;
 			}
 			//checka se o espaco do salto esta vazio
 			if (tabuleiro[x-2][y] != '0'){
-				printf("Movimento invalido c1\n");
+				if(deveImprimir)
+					printf("Movimento invalido c3\n");
 				return false;
 			}
 	        break;
@@ -104,17 +116,20 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	    case baixo:
             //checka se espaco na matriz pro "salto"
 			if (x>4){
-				printf("Movimento invalido b1\n");
+				if(deveImprimir)
+					printf("Movimento invalido b1\n");
 				return false;
 			}
 			//checka se existe uma peca adjacente pra saltar por cima
 			if (tabuleiro[x+1][y] != '1'){
-			    printf("Movimento invalido b2\n");
+				if(deveImprimir)
+			    	printf("Movimento invalido b2\n");
 				return false;
 			}
 			//checka se o espaco do salto esta vazio
 			if (tabuleiro[x+2][y] != '0'){
-				printf("Movimento invalido b3\n");
+				if(deveImprimir)
+					printf("Movimento invalido b3\n");
 				return false;
 			}
             break;
@@ -122,18 +137,20 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	    case esquerda:
             //checka se espaco na matriz pro "salto"
 			if (y<2){
-				printf("Movimento invalido e1\n");
+				if(deveImprimir)
+					printf("Movimento invalido e1\n");
 				return false;
 			}
 			//checka se existe uma peca adjacente pra saltar por cima
 			if (tabuleiro[x][y-1] != '1'){
-				printf("Movimento invalido e2\n");
+				if(deveImprimir)
+					printf("Movimento invalido e2\n");
 				return false;
 			}
 			//checka se o espaco do salto esta vazio
 			if (tabuleiro[x][y-2] != '0'){
-				printf("%c \n",tabuleiro[x][y-2]);
-				printf("Movimento invalido e3\n");
+				if(deveImprimir) 
+					printf("Movimento invalido e3\n");
 				return false;
 			}
             break;
@@ -141,17 +158,20 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	    case direita:
             //checka se espaco na matriz pro "salto"
 			if (y>4){
-				printf("Movimento invalido d1\n");
+				if(deveImprimir)
+					printf("Movimento invalido d1\n");
 				return false;
 			}
 			//checka se existe uma peca adjacente pra saltar por cima
 			if (tabuleiro[x][y+1] != '1'){
-				printf("Movimento invalido d2\n");
+				if(deveImprimir)
+					printf("Movimento invalido d2\n");
 				return false;
 			}
 			//checka se o espaco do salto esta vazio
 			if (tabuleiro[x][y+2] != '0'){
-				printf("Movimento invalido d3\n");
+				if(deveImprimir)
+					printf("Movimento invalido d3\n");
 				return false;
 			}
             break;
@@ -160,7 +180,6 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 			break;
 	}
 	
-	printf("sucesso");
     return true;
 }
 
@@ -228,7 +247,7 @@ bool joga(char tabuleiro[][SIZE]){
 
 	j = getInputDoJogador();
 	
-	if(validarJogada(j, tabuleiro)){
+	if(validarJogada(j, tabuleiro, true)){
 		realizaJogada(j, tabuleiro);
 		jogou = true;
 	}
@@ -272,6 +291,42 @@ bool venceu(char tabuleiro[][SIZE]) {
 
 	return flag;
 }
+
+bool jogadaSeraAutomatica() {
+
+	char escolha;
+
+	do {
+
+		printf("Deseja que a proxima jogada seja automatica?\nS - SIM    N - NAO\n");
+		getchar();
+		scanf("%c", &escolha);
+
+		escolha = toupper(escolha);
+
+	} while(escolha != 'S' && escolha != 'N');
+
+
+	return escolha == 'S';
+
+}
+
+void jogadaAutomatica(char tabuleiro[][SIZE]) {
+
+	for(int x = 0; x < SIZE; x++) {
+		for(int y = 0; y < SIZE; y++) {
+			for(int k = 0; k < 4; k++) {
+				Jogada jogada(x, y, k);
+
+				if(validarJogada(jogada, tabuleiro, false)) {
+					realizaJogada(jogada, tabuleiro);
+					return;
+				}
+			}
+		}
+	}
+}
+
 
 
 

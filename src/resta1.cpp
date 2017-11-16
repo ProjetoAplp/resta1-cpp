@@ -67,8 +67,8 @@ void exibe_tabuleiro(char tabuleiro[MAX][MAX])
 {
     int i,j, k;
     cout << EOL;
-    cout << "x" << TRIM
-;    char coluna[MAX] = {'A','B','C','D','E','F','G'};
+    cout << "x" << TRIM;
+    char coluna[MAX] = {'A','B','C','D','E','F','G'};
     
     for(i=0; i < MAX; i++){
         cout << coluna[i] << TRIM;
@@ -129,14 +129,20 @@ int main(){
     
     //gameLoop
     while(1){
+
         exibe_tabuleiro(tabuleiro);
-        joga(tabuleiro);
+
+        if(jogadaSeraAutomatica()) {
+            jogadaAutomatica(tabuleiro);
+        } else {
+            joga(tabuleiro);
+        }
 
         if(venceu(tabuleiro)) {
-            cout << "VENCEU" << EOL;
+            cout << EOL <<  "VENCEU" << EOL;
             break;
         } else if(!existeJogada(tabuleiro)) {
-            cout << "PERDEU" << EOL;
+            cout << EOL << "PERDEU" << EOL;
             break;
         }
 
