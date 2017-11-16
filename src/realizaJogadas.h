@@ -9,6 +9,12 @@ struct Jogada{
     int  x;
     int  y;
     int direcao;
+
+    Jogada()
+    {   }
+
+    Jogada(int a, int b, int c) : x(a), y(b), direcao(c)
+    {   }
 };
 
 struct Tabuleiro{
@@ -33,7 +39,6 @@ bool validarJogada(struct Jogada, char tabuleiro[][7]);
 */
 void realizaJogada(struct Jogada, char tabuleiro[][7]);
 
-
 /*
 * Recebe uma jogada, se ela for valida, eh realizada 
 */
@@ -44,15 +49,23 @@ bool joga(char tabuleiro[][7]);
 */
 bool existeJogada(char tabuleiro[][7]);
 
-
 /*
 * Funcao auxiliar que rotaciona o tabuleiro a fim de contar apenas um time de movimento
 */
 void rotacionaTabuleiro(char tabuleiro[][7]);
 
-
 /*
 * Verifica se o jogador venceu o jogo
 */
 bool venceu(char tabuleiro[][7]);
+
+/*
+ Oferece a possibilidade da proxima jogada ser automatica
+ */
+bool jogadaSeraAutomatica();
+
+/*
+* Joga automaticamente
+*/
+void jogadaAutomatica(char tabuleiro[][7]);
 
