@@ -164,6 +164,22 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
     return true;
 }
 
+int getNumeroJogadas(char tabuleiro[][SIZE]) {
+	int jogadas = 0;
+	for (int x = 0; x < SIZE; x++) {
+		for (int y = 0; y < SIZE; y++) {
+			if (tabuleiro[x][y] == '1') {
+				if (x-1 <= 6 && tabuleiro[x-1][y] == '1') {
+					if (x-2 <= 6 && tabuleiro[x-2][y] == '0') {
+						jogadas++;
+					}
+				}
+			}
+		}
+	}
+	return jogadas;
+}
+
 void realizaJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
 	//remove a peca do espaco escolhido
 	int x = jogada.x;
@@ -204,34 +220,6 @@ void realizaJogada(struct Jogada jogada, char tabuleiro[][SIZE]){
     default: 
     	break;
 	}
-	
-	// if(direcao == 0)/*cima*/{
- //        //come a peca adjacante
-	// 	tabuleiro[x-1][y] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x-2][y] = '1';
- //    } 
-
-	// if(direcao == 1)/*baixo*/{
-	// 	//come a peca adjacante
-	// 	tabuleiro[x+1][y] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x+2][y] = '1';
- //    }
-
-	// if(direcao == 2)/*esquerda*/{
-	// 	//come a peca adjacante
-	// 	tabuleiro[x][y-1] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x][y-2] = '1';
- //    }
-
-	// if(direcao == 3)/*direita*/{
-	// 	//come a peca adjacante
-	// 	tabuleiro[x][y+1] = '0';
-	// 	//add peca ao local do salto
-	// 	tabuleiro[x][y+2] = '1';
- //    }
 }
 
 bool joga(char tabuleiro[][SIZE]){
@@ -252,27 +240,11 @@ bool existeJogada(char tabuleiro[][SIZE]) {
 
 	int jogadas = 0;
 	for (int i = 0; i < 4; i++) { //pra frente, pra tras, pro lado e pro outro
-		jogadas += existeJogadaHelper(tabuleiro);
+		jogadas += getNumeroJogadas(tabuleiro);
 		rotacionaTabuleiro(tabuleiro);
  	}
 
 	return jogadas != 0;
-}
-
-int existeJogadaHelper(char tabuleiro[][SIZE]) {
-	int jogadas = 0;
-	for (int x = 0; x < SIZE; x++) {
-		for (int y = 0; y < SIZE; y++) {
-			if (tabuleiro[x][y] == '1') {
-				if (x-1 <= 6 && tabuleiro[x-1][y] == '1') {
-					if (x-2 <= 6 && tabuleiro[x-2][y] == '0') {
-						jogadas++;
-					}
-				}
-			}
-		}
-	}
-	return jogadas;
 }
 
 void rotacionaTabuleiro(char tabuleiro[][SIZE]) {

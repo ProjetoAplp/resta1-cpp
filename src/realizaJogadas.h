@@ -46,12 +46,6 @@ bool existeJogada(char tabuleiro[][7]);
 
 
 /*
-* Funcao auxiliar que conta o numero de jogadas pra cima possiveis
-*/
-int existeJogadaHelper(char tabuleiro[][7]);
-
-
-/*
 * Funcao auxiliar que rotaciona o tabuleiro a fim de contar apenas um time de movimento
 */
 void rotacionaTabuleiro(char tabuleiro[][7]);
