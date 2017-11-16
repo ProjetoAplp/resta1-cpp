@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+#IDE
+.idea
+cmake-build-debug
+CMakeLists.txt
+
+#OSX
+.DS_Store
+src/resta1

@@ -40,7 +40,7 @@ void realizaJogada(struct Jogada, char tabuleiro[][7]);
 bool joga(char tabuleiro[][7]);
 
 /*
-* Verifica se existe alguma jogada valida a ser feito no jogo, caso nao haja o jogo eh encerrado
+* Verifica se existe alguma jogada valida a ser feito no jogo
 */
 bool existeJogada(char tabuleiro[][7]);
 

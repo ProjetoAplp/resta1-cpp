@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include <iostream>
 #include <ctype.h>
-#include "realizaJogadas.h"
+#include "realiza_jogadas.h"
 
 #define SIZE 7
 #define EOL "\n"

@@ -1,6 +1,7 @@
 #include <iostream>
-#include<stdio.h>
-#include "realizaJogadas.h"
+#include <stdio.h>
+#include "realiza_jogadas.h"
+#include "testes.h"
 
 #define MAX 7
 #define INGLES 0
@@ -119,14 +120,13 @@ void imprime_regras(){
     cout << EOL;
 };
 
-int main(){
-    
+void executarJogo(){
     char tabuleiro[MAX][MAX];
-    
+
     //setup
     imprime_regras();
     selecionar_tabuleiro(tabuleiro);
-    
+
     //gameLoop
     while(1){
         exibe_tabuleiro(tabuleiro);
@@ -140,6 +140,27 @@ int main(){
             break;
         }
 
+    }
+}
+
+
+int main(){
+
+    int opt;
+    cout << "1: Executar jogo" << EOL;
+    cout << "2: Executar testes" << EOL;
+    cin >> opt;
+
+    switch(opt){
+        case 1:
+            executarJogo();
+            break;
+        case 2:
+            executarTestes();
+            break;
+        default:
+            cout << "Opção inválida!" << EOL;
+            break;
     }
 
     return 0;
