@@ -139,14 +139,16 @@ int main(){
         }
 
         if(venceu(tabuleiro)) {
-            cout << EOL <<  "VENCEU" << EOL;
+            cout << EOL <<  "Vitoria! :D" << EOL;
             break;
         } else if(!existeJogada(tabuleiro)) {
-            cout << EOL << "PERDEU" << EOL;
+            cout << EOL << "Derrota :(" << EOL;
             break;
         }
 
     }
+
+    exibe_tabuleiro(tabuleiro);
 
     return 0;
 };
