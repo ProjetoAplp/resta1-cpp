@@ -185,3 +185,8 @@ void executarTestes(){
     testeRotacaoTabuleiro();
     testeExisteJogada();
 }
+
+int main(){
+    executarTestes();
+    return 0;
+};

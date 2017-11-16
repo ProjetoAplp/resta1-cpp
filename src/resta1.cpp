@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdio.h>
 #include "realiza_jogadas.h"
-#include "testes.h"
 
 #define MAX 7
 #define INGLES 0
@@ -145,23 +144,6 @@ void executarJogo(){
 
 
 int main(){
-
-    int opt;
-    cout << "1: Executar jogo" << EOL;
-    cout << "2: Executar testes" << EOL;
-    cin >> opt;
-
-    switch(opt){
-        case 1:
-            executarJogo();
-            break;
-        case 2:
-            executarTestes();
-            break;
-        default:
-            cout << "Opção inválida!" << EOL;
-            break;
-    }
-
+    executarJogo();
     return 0;
 };
