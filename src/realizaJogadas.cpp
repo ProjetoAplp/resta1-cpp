@@ -85,7 +85,7 @@ bool validarJogada(struct Jogada jogada, char tabuleiro[][SIZE], bool deveImprim
 	//printf("%d  %d  %d  x,y,dir \n", x, y, direcao);//debug
 
 	//nao possui peca no lugar indicado
-	if(tabuleiro[x][y] == '0'){
+	if(tabuleiro[x][y] != '1'){
 		if(deveImprimir)
 			printf("Escolha um espaco com uma peca\n");
 		return false;
@@ -299,8 +299,7 @@ bool jogadaSeraAutomatica() {
 	do {
 
 		printf("Deseja que a proxima jogada seja automatica?\nS - SIM    N - NAO\n");
-		getchar();
-		scanf("%c", &escolha);
+		cin >> escolha;
 
 		escolha = toupper(escolha);
 
